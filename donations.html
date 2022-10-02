@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer scr="script.js"></script>
+    <link href="styles.css" rel="stylesheet" />
+
+    <title>Donations</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .slidecontainer {
+        width: 100%;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        margin: 0 auto;
+        display: inline-block;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04aa6d;
+        cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04aa6d;
+        cursor: pointer;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial;
+        font-size: 17px;
+      }
+      @font-face {
+        src: url(fonts/Magic\ Sparkle.ttf);
+        font-family: MagicSparkle;
+      }
+
+      #background-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+      .fade-in {
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.9s;
+      }
+
+      @keyframes fadeInOpacity {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .content {
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.9s;
+      }
+      @keyframes fadeInOpacity {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      h1,
+      h2,
+      h5 {
+        color: white;
+        font-family: Trebuchet MS;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 6px 7px 5px black;
+      }
+
+      p2 {
+        font-size: 30px;
+        color: black;
+        padding-top: 150px;
+        padding-left: 20px;
+        padding-right: 150px;
+        padding-bottom: 600px;
+      }
+
+      h3 {
+        font-size: 30px;
+        color: white;
+        padding-top: 30px;
+        padding-left: 150px;
+        padding-right: 150px;
+      }
+
+      p1 {
+        padding-bottom: 150px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 25px;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        text-shadow: 2px 2px 2px #111;
+      }
+      p3 {
+        font-size: 30px;
+        color: black;
+        padding-top: 150px;
+        padding-left: 20px;
+        padding-right: 150px;
+        padding-bottom: 150px;
+      }
+
+      p {
+        font-size: 20px;
+        color: white;
+        padding-top: 5px;
+        padding-left: 150px;
+        padding-right: 150px;
+      }
+
+      h1 {
+        font-size: 6rem;
+        margin-top: 30vh;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+      @media (max-width: 750px) {
+        #background-video {
+          display: none;
+        }
+        body {
+          background: url("https://assets.codepen.io/6093409/river.jpg")
+            no-repeat;
+          background-size: cover;
+        }
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+      }
+
+      .col-25 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+      }
+
+      .col-50 {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+      }
+
+      .col-75 {
+        -ms-flex: 75%; /* IE10 */
+        flex: 75%;
+      }
+
+      .col-25,
+      .col-50,
+      .col-75 {
+        padding: 0 16px;
+      }
+
+      .container {
+        background-color: #f2f2f2;
+        padding: 5px 20px 15px 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      label {
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .icon-container {
+        margin-bottom: 20px;
+        padding: 7px 0;
+        font-size: 24px;
+      }
+
+      .btn {
+        background-color: #04aa6d;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+
+      span.price {
+        float: right;
+        color: grey;
+      }
+
+      /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+      @media (max-width: 800px) {
+        .row {
+          flex-direction: column-reverse;
+        }
+        .col-25 {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+    <meta
+      content="7; url='file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/remora.html'"
+    />
+    <meta
+      content="7; url='file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/about.html'"
+    />
+    <meta
+      content="7; url='file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/contactus.html'"
+    />
+    <meta
+      content="7; url='file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/donations.html"
+    />
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a
+        href="file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/remora.html"
+        >Home</a
+      >
+      <a
+        href="file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/about.html"
+        >About</a
+      >
+      <a
+        href="file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/contactus.html"
+        >Contact us</a
+      >
+      <a
+        href="file:///Users/jocelynpineda/Desktop/SheCode%20projects/Makeathon/Makeathon/donations.html"
+        >Donations</a
+      >
+    </div>
+    <video id="background-video" autoplay loop muted poster="donations.mp4">
+      <source src="donations.mp4" type="video/mp4" />
+    </video>
+    <div id="main">
+      <h1 class="donations">Donations</h1>
+      <h2>Help Us Make a Change.</h2>
+      <span style="font-size: 30px; cursor: pointer" onclick="openNav()">
+        <h5>&#9776; menu</h5></span
+      >
+      <p1>Drag bar to select the amount.</p1>
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="1"
+          max="1000"
+          value="5"
+          class="slider"
+          id="myRange"
+        />
+        <p>Value: <span id="demo"></span></p>
+      </div>
+      <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form action="/action_page.php">
+              <div class="row">
+                <div class="col-50">
+                  <p2>Billing Address</p2>
+                  <label for="fname"
+                    ><i class="fa fa-user"></i> Full Name</label
+                  >
+                  <input
+                    type="text"
+                    id="fname"
+                    name="firstname"
+                    placeholder="John M. Doe"
+                  />
+                  <label for="email"
+                    ><i class="fa fa-envelope"></i> Email</label
+                  >
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="john@example.com"
+                  />
+                  <label for="adr"
+                    ><i class="fa fa-address-card-o"></i> Address</label
+                  >
+                  <input
+                    type="text"
+                    id="adr"
+                    name="address"
+                    placeholder="542 W. 15th Street"
+                  />
+                  <label for="city"
+                    ><i class="fa fa-institution"></i> City</label
+                  >
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="New York"
+                  />
+
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="state">State</label>
+                      <input
+                        type="text"
+                        id="state"
+                        name="state"
+                        placeholder="NY"
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="zip">Zip</label>
+                      <input
+                        type="text"
+                        id="zip"
+                        name="zip"
+                        placeholder="10001"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-50">
+                  <p3>Payment</p3>
+                  <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color: navy"></i>
+                    <i class="fa fa-cc-amex" style="color: blue"></i>
+                    <i class="fa fa-cc-mastercard" style="color: red"></i>
+                    <i class="fa fa-cc-discover" style="color: orange"></i>
+                  </div>
+                  <label for="cname">Name on Card</label>
+                  <input
+                    type="text"
+                    id="cname"
+                    name="cardname"
+                    placeholder="John More Doe"
+                  />
+                  <label for="ccnum">Credit card number</label>
+                  <input
+                    type="text"
+                    id="ccnum"
+                    name="cardnumber"
+                    placeholder="1111-2222-3333-4444"
+                  />
+                  <label for="expmonth">Exp Month</label>
+                  <input
+                    type="text"
+                    id="expmonth"
+                    name="expmonth"
+                    placeholder="September"
+                  />
+
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">Exp Year</label>
+                      <input
+                        type="text"
+                        id="expyear"
+                        name="expyear"
+                        placeholder="2018"
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">CVV</label>
+                      <input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        placeholder="352"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label>
+                <input type="checkbox" checked="checked" name="sameadr" />
+                Shipping address same as billing
+              </label>
+              <input type="submit" value="Continue to checkout" class="btn" />
+            </form>
+          </div>
+        </div>
+
+        <div class="col-25">
+          <div class="container">
+            <h4>
+              Cart
+              <span class="price" style="color: black">
+                <i class="fa fa-shopping-cart"></i>
+              </span>
+            </h4>
+            <hr />
+            <p>
+              Total
+              <span class="price" style="color: black"><b>Total: </b></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function () {
+        output.innerHTML = this.value;
+      };
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
+  </body>
+</html>
